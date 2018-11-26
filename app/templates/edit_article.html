@@ -1,0 +1,52 @@
+{% extends "includes/base.html" %}
+
+{% block body  %}
+<!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/static/cat/img/code.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Edit Article</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<p>&nbsp;</p>
+<!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <h3>{{ message }}</h3>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith%}
+                {% block body %}
+                {% from "includes/_formhelpers.html" import render_field %}
+                <form method="post" action="/edit_cat_article/{{article_form.id.data}}">
+                    <div class="form-group">
+                        {{ article_form.title.label }}<br>
+                        {{ article_form.title(**{"class":"form-control"}) }}
+                     </div>
+                    <br>
+                    <div class="form-group">
+                        {{ article_form.content.label }}<br>
+                        {{ article_form.content(id="editor", **{"class":"form-control"}) }}
+                    </div>
+                    <div>
+                        <p>&nbsp;</p>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                </form>
+                    {% endblock %}
+            </div>
+        </div>
+    </div>
+     <hr>
+{% endblock%}
+

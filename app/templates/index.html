@@ -1,0 +1,52 @@
+{% extends "includes/base.html" %}
+
+{% block body  %}
+<!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/static/cat/img/thumb-1920-338208.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>CleanCode Blog</h1>
+                        <hr class="small">
+                        <span class="subheading">A Clean Code Blog offering IT solutions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% block content %}
+                {% for post in posts.items %}
+                <div class="post-preview">
+                    <div class="well well-sm">
+                    <a href="articles/{{ post.id }}">
+                        <h2 class="post-title">
+                            {{post.title}}
+                        </h2>
+                        <h3 class="post-subtitle">
+                            {{post.title}}
+                        </h3>
+                    <li class="list-group-item">Posted by {{ post.author}}</a> on {{ post.created_date}}</li>
+                    </div>
+                </div>
+                {% endfor %}
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    {% for post in posts.items %}
+                    {% endfor %}
+                        {% if posts.has_prev %}<a href="{{ url_for('index_cat', page=posts.prev_num) }}">&lt;&lt; Newer posts</a>{% else %}&lt;&lt; Newer posts{% endif %} |
+                        {% if posts.has_next %}<a href="{{ url_for('index_cat', page=posts.next_num) }}">Older posts &gt;&gt;</a>{% else %}Older posts &gt;&gt;{% endif %}
+                </ul>
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+    <hr>
+{% endblock%}
+

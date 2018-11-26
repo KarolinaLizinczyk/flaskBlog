@@ -1,0 +1,53 @@
+{% extends "includes/base.html" %}
+
+{% block body %}
+<!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('static/cat/img/6f9d650eebc8e2152b71b2861d956866--bokeh-photography-teddy-bears.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Add Article</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<p>&nbsp;</p>
+<!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <h3>{{ message }}</h3>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith%}
+                {% block body %}
+                {% from " includes/_formhelpers.html" import render_field %}
+                <form method="post" action="post_cat_form">
+                    <div class="form-group">
+                        <!--<input class="form-control" id="title" name="title" value="" type="text">-->
+                        {{ render_field(article_form.title, class="form-control")}}
+                     </div>
+                    <br>
+                    <div class="form-group">
+                        <!--<input class="form-control" id="title" name="title" value="" type="text">-->
+                        {{ render_field(article_form.content, class="form-control", id="editor") }}
+                    </div>
+                    <div>
+                        <p>&nbsp;</p>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Add Article">
+                </form>
+                    {% endblock %}
+            </div>
+        </div>
+    </div>
+     <hr>
+{% endblock %}
+
+
